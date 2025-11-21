@@ -25,7 +25,16 @@ SELECT
     d.date_sk AS date_sk,
     t.started_at,
     t.ended_at,
-    t.rideable_type
+    t.rideable_type,
+    -- Trip duration in minutes (end time minus start time)
+    DATEDIFF(minute, t.started_at, t.ended_at) AS trip_duration,
+    -- Rider's exact age at the time of the trip (adjusted for whether the birthday has passed)
+    DATEDIFF(year, r.birthday, t.started_at)
+        - CASE 
+            WHEN DATEADD(year, DATEDIFF(year, r.birthday, t.started_at), r.birthday) > t.started_at 
+                THEN 1 
+            ELSE 0 
+          END AS rider_age_at_trip
 FROM dbo.staging_trip t
 JOIN dbo.dim_rider r 
     ON t.member_id = r.rider_id

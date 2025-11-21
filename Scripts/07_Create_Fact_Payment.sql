@@ -6,7 +6,7 @@ IF OBJECT_ID('dbo.fact_payment') IS NOT NULL
 GO
 
 -----------------------------
--- 8. Create dim_station using CETAS from staging_station
+-- 8. Create fact_payment using CTAS from staging_payment
 -----------------------------
 CREATE EXTERNAL TABLE dbo.fact_payment
 WITH (

@@ -10,7 +10,7 @@ dates = pd.date_range(start=start_date, end=end_date, freq='D')
 df = pd.DataFrame({'date': dates})
 
 # Add colums
-df['date_sk'] = np.arange(1, len(df)+1)  # surrogate key
+df['date_sk'] = np.arange(1, len(df)+1)  # surrogate key ( use number from 0 or use yyyyMMdd as key)
 df['year'] = df['date'].dt.year
 df['quarter'] = df['date'].dt.quarter
 df['month'] = df['date'].dt.month

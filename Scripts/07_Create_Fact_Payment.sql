@@ -16,6 +16,7 @@ WITH (
 )
 AS
 SELECT
+    ROW_NUMBER() OVER (ORDER BY p.payment_id) AS payment_sk,
     p.payment_id,
     d.date_sk,
     r.rider_sk,
